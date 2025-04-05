@@ -72,58 +72,108 @@ class _JokenpoGameState extends State<JokenpoGame> {
     }
   }
 
+  String _imagemJogador(int escolha) {
+    switch (escolha) {
+      case 1:
+        return "assets/images/pedra.jpeg";
+      case 2:
+        return "assets/images/papel.jpeg";
+      case 3:
+        return "assets/images/tesoura.jpeg";
+      default:
+        return "";
+    }
+  }
+
+  String _imagemComputador(int escolha) {
+    switch (escolha) {
+      case 1:
+        return "assets/images/pedra2.jpeg";
+      case 2:
+        return "assets/images/papel2.jpeg";
+      case 3:
+        return "assets/images/tesoura2.jpeg";
+      default:
+        return "";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Jokenpo")),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text("Escolha sua jogada:"),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      escolhaJogador = 1;
-                    });
-                  },
-                  child: Text("Pedra", style: TextStyle(fontSize: 20)),
-                ),
-                SizedBox(width: 20), // Espaçamento entre os botões.
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      escolhaJogador = 2;
-                    });
-                  },
-                  child: Text("Papel", style: TextStyle(fontSize: 20)),
-                ),
-                SizedBox(width: 20), // Espaçamento entre os botões.
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      escolhaJogador = 3;
-                    });
-                  },
-                  child: Text("Tesoura", style: TextStyle(fontSize: 20)),
-                ),
-              ],
-            ),
-            ElevatedButton(
-              onPressed: () {
-                if (escolhaJogador != 0) {
-                  _jogadaComputador();
-                }
-              },
-              child: Text("Jogar"),
-            ),
-            Text("Sua escolha: ${_opcaoParaTexto(escolhaJogador)}"),
-            Text(jogadaComputadorExibida),
-            Text("Resultado: $resultado"),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("Escolha sua jogada:", style: TextStyle(fontSize: 20)),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        escolhaJogador = 1;
+                      });
+                    },
+                    child: Column(
+                      children: [
+                        Image.asset("assets/images/pedra.jpeg", width: 80, height: 80),
+                        Text("PEDRA", style: TextStyle(fontSize: 16)),
+                      ],
+                    ),
+                  ),
+                  SizedBox(width: 20), // Espaçamento entre os botões.
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        escolhaJogador = 2;
+                      });
+                    },
+                    child: Column(
+                      children: [
+                        Image.asset("assets/images/papel.jpeg", width: 80, height: 80),
+                        Text("PAPEL", style: TextStyle(fontSize: 16)),
+                      ],
+                    ),
+                  ),
+                  SizedBox(width: 20), // Espaçamento entre os botões.
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        escolhaJogador = 3;
+                      });
+                    },
+                    child: Column(
+                      children: [
+                        Image.asset("images/tesoura.jpeg", width: 80, height: 80),
+                        Text("TESOURA", style: TextStyle(fontSize: 16)),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  if (escolhaJogador != 0) {
+                    _jogadaComputador();
+                  }
+                },
+                child: Text("PLAY"),
+              ),
+              SizedBox(height: 20),
+              Text("Sua escolha: ${_opcaoParaTexto(escolhaJogador)}"),
+              if (escolhaJogador != 0) Image.asset(_imagemJogador(escolhaJogador), width: 100, height: 100),
+              SizedBox(height: 20), 
+              Text(jogadaComputadorExibida),
+              if (escolhaComputador != 0) Image.asset(_imagemComputador(escolhaComputador), width: 100, height: 100),
+              SizedBox(height: 20),
+              Text("Resultado: $resultado", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            ],
+          ),
         ),
       ),
     );
