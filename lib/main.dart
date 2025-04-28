@@ -148,7 +148,7 @@ class _JokenpoGameState extends State<JokenpoGame> {
                     },
                     child: Column(
                       children: [
-                        Image.asset("images/tesoura.jpeg", width: 80, height: 80),
+                        Image.asset("assets/images/tesoura.jpeg", width: 80, height: 80),
                         Text("TESOURA", style: TextStyle(fontSize: 16)),
                       ],
                     ),
